@@ -1,4 +1,4 @@
-# 🔥 Napalm Package: napalm-base
+# 🔥 Napalm Package: napalm-core
 This is an automatically generated report on the detectors in this package.
 
 Some quick stats:
