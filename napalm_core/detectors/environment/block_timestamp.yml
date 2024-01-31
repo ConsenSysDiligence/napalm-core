@@ -1,0 +1,17 @@
+rules:
+    - id: int-cast-block-timestamp
+      message: |
+        Casting block.timestamp can lead to reduced precision and unexpected behavior, consider not casting instead.
+      patterns:
+        - pattern: |
+           uint8(block.timestamp)
+      metadata:
+        category: best-practice
+        technology:
+          - solidity
+        confidence: MEDIUM
+        likelihood: MEDIUM
+        impact: MEDIUM
+      languages:
+        - solidity
+      severity: WARNING

@@ -1,0 +1,15 @@
+rules:
+  - id: block-number-l2
+    message: >
+      Solidity's block.number semantics are not consistent on L2s, leading to potential vulnerabilities.
+    pattern: block.number
+    metadata:
+      category: indicator
+      technology:
+        - solidity
+      confidence: LOW
+      likelihood: LOW
+      impact: MEDIUM
+    languages:
+      - solidity
+    severity: INFO

@@ -1,0 +1,23 @@
+rules:
+  - id: math-in-unsafe-block
+    message: >
+      Mathematical operators in unsafe blocks are not checked for under flows or overflows.
+    patterns:
+      - pattern-either:
+          - pattern: $X + $Y
+          - pattern: $X - $Y
+      - pattern-inside: |
+          unchecked {
+            ...
+          }
+
+    metadata:
+      category: best-practice
+      technology:
+        - solidity
+      confidence: LOW
+      likelihood: LOW
+      impact: MEDIUM
+    languages:
+      - solidity
+    severity: INFO

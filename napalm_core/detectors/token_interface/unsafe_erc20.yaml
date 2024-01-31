@@ -1,0 +1,21 @@
+rules:
+  - id: use-of-unsafe-erc20-functions
+    message: >
+      The ERC20 implementation does not automatically include checks that ensure the success of the operation. Using the
+      OpenZeppelin's SafeERC20 library is recommended.
+    patterns:
+      - pattern-either:
+          - pattern: $X.transfer($Y)
+          - pattern: $X.transferFrom($Y, $Z)
+          - pattern: $X.approve($Y, $Z)
+    metadata:
+      category: best-practice
+      technology:
+        - solidity
+      confidence: LOW
+      likelihood: LOW
+      impact: LOW
+      note: improve - check if X is ERC20
+    languages:
+      - solidity
+    severity: INFO

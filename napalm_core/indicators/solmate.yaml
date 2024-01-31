@@ -1,0 +1,25 @@
+rules:
+  - id: import-safetransfer-solmate
+    message: >
+      Solmate's SafeTransferLib doesn't perform the same checks SafeERC20 does,
+      in particular it doesn't check if a contract exists leading to potential
+      vulnerabilities.
+    patterns:
+      - pattern: import {$Y} from "$X";
+      - metavariable-regex:
+          metavariable: $X
+          regex: .*(solmate)
+      - metavariable-regex:
+          metavariable: $Y
+          regex: (SafeTransferLib)
+    metadata:
+
+      category: indicator
+      technology:
+        - solidity
+      confidence: LOW
+      likelihood: LOW
+      impact: MEDIUM
+    languages:
+      - solidity
+    severity: INFO

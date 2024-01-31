@@ -1,0 +1,56 @@
+rules:
+  - id: storage-variable-bool
+    message: >
+      Using bool as a storage variable is more expensive than uint256 or other
+      types that fill a whole 256 bit word.
+    pattern-either:
+      - pattern: bool $X;
+      - pattern: bool $Y = ...;
+    metadata:
+      references: https://github.com/OpenZeppelin/openzeppelin-contracts/blob/58f635312aa21f947cae5f8578638a85aa2519f5/contracts/security/ReentrancyGuard.sol#L23-L27
+      category: optimization
+      technology:
+        - solidity
+      confidence: HIGH
+      likelihood: LOW
+      impact: LOW
+    languages:
+      - solidity
+    severity: INFO
+
+  - id: cache-array-length-loop
+    message: >
+      The compiler will re-execute each instance of .length for each loop
+      iteration. Caching the length will reduce the amount of sloads necessary
+      to perform the operation.
+    patterns:
+      - pattern: for (...; $X.length; ) { ... }
+    metadata:
+      category: optimization
+      technology:
+        - solidity
+      confidence: HIGH
+      likelihood: LOW
+      impact: LOW
+    languages:
+      - solidity
+    severity: INFO
+
+  - id: initialize-default-value
+    message: >
+      Initializing variables with their default value leads to unnecessary gas expenditure
+    pattern-either:
+      - pattern: $D $X = 0;
+    metavariable-regex:
+      metavariable: $D
+      regex: (u?int.*)|
+    metadata:
+      category: optimization
+      technology:
+        - solidity
+      confidence: HIGH
+      likelihood: LOW
+      impact: LOW
+    languages:
+      - solidity
+    severity: INFO

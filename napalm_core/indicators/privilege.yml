@@ -1,0 +1,32 @@
+rules:
+  - id: use-of-privilege-to-protect-sensitive-functions
+    message: >
+      It's necessary to implement proper controls on wallet security when 
+      privileged functions are used to protect sensitive functions.
+    patterns:
+      - pattern-either:
+          - patterns:
+              - pattern: function $X() public $Z { ... }
+              - metavariable-regex:
+                  metavariable: $Z
+                  regex: (only|requiresAuth)
+          - patterns:
+            - pattern: function $X() public $Y(...) { ... }
+            - metavariable-regex:
+                metavariable: $Y
+                regex: (only)
+          - patterns:
+            - pattern: contract $X is $C { ... }
+            - metavariable-regex:
+                metavariable: $C
+                regex: (Ownable|Owned|Auth|Authority|AccessControl)
+    metadata:
+      category: best-practice
+      technology:
+        - solidity
+      confidence: LOW
+      likelihood: LOW
+      impact: HIGH
+    languages:
+      - solidity
+    severity: INFO

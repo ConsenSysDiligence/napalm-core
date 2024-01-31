@@ -1,0 +1,23 @@
+rules:
+  - id: block-timestamp-swap
+    message: >
+      Passing block.timestamp as the deadline effectively removes the deadline functionality which
+      prevents malicious validators from holding back transactions to execute them at a later time.
+    patterns:
+      - pattern: $X.$CALL(..., <... $Y ...>, ...);
+      - metavariable-regex:
+          metavariable: $CALL
+          regex: (swap|ExactInput|ExactOutput)
+      - metavariable-regex:
+          metavariable: $Y
+          regex: (block.timestamp)
+    metadata:
+      category: best-practice
+      technology:
+        - solidity
+      confidence: MEDIUM
+      likelihood: MEDIUM
+      impact: MEDIUM
+    languages:
+      - solidity
+    severity: WARNING
