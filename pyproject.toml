@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "napalm-core"
-version = "0.1.1"
+version = "0.1.2"
 description = "Your project to manage napalm detection modules"
 license = "AGPL-3.0"
 readme = "README.md"
@@ -18,5 +18,5 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.plugins."napalm.collection"]
-"napalm-base" = "napalm_core.napalm:entry_point"
+"napalm-core" = "napalm_core.napalm:entry_point"
 
